@@ -6,10 +6,6 @@ import os
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
-if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))  # Use PORT from Render, default to 5000 locally
-    app.run(host='0.0.0.0', port=port, debug=False)
-
 
 @app.route('/token_price', methods=['GET'])
 def get_token_price():
@@ -35,5 +31,7 @@ def get_token_price():
         return jsonify({'error': str(e)}), 500
 
 
+# ✅ Ensure this block is at the **end** of the file
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))  # Use PORT from Render, default to 5000 locally
+    app.run(host='0.0.0.0', port=port, debug=False)
